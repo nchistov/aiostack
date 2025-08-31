@@ -1,0 +1,13 @@
+from collections import UserDict
+from typing import Any
+
+
+class Item(UserDict[str, Any]):
+    def __getattr__(self, name: str) -> Any:
+        return self.data[name]
+
+    def __str__(self) -> str:
+        out = []
+        for attr in self.data:
+            out.append(f'{attr}: {self.data[attr]}\n')
+        return ''.join(out)
