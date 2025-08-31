@@ -1,5 +1,3 @@
-from typing import Any
-
 import aiohttp
 from ._raw_response_dict import RawResponseDict
 
