@@ -1,6 +1,6 @@
 [project]
 name = "aiostack"
-version = "0.0.1a"
+version = "0.1.0a"
 
 dependencies = [
     "aiohttp>=3.12.15",
