@@ -1,6 +1,7 @@
 from .item import Item
 from . import sites
 from .site import Site
+from . import errors
 
 from . import _base_client
 from . import _raw_response_dict
