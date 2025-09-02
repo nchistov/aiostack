@@ -14,5 +14,5 @@ async def get(url: str, **kwargs: str | int) -> RawResponseDict:
             if status != 200:
                 raise HTTPError(data['error_message'])
 
-            response = RawResponseDict(data['items'], data['has_more'], data['quota_max'], data['quota_remaining'])
+            response = RawResponseDict(**data)
             return response
