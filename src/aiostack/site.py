@@ -34,7 +34,7 @@ class Site:
 
     async def get_answers_by_id(self, ids: list[int], **kwargs: str | int) -> list[Item]:
         """Get answers identified by a set of ids"""
-        url = 'answers' + ';'.join([str(id) for id in ids])
+        url = 'answers/' + ';'.join([str(id) for id in ids])
         data = await self.get(url, **kwargs)
 
         return data.items
