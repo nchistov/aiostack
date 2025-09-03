@@ -1,5 +1,5 @@
 # AIOStack
-## Modern async StackExchange API wrapper
+## Modern async StackExchange API wrapper (Inspired by PyStackAPI)
 
 ### Library is in development! Version 0.1.0a
 

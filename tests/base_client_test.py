@@ -18,9 +18,9 @@ async def test_base_client_get(mocker):
 @pytest.mark.asyncio
 async def test_error(mocker):
     with pytest.raises(aiostack.errors.HTTPError):
-        resp = MockResponse({'error_id': 400,
-                             'error_message': 'No site found for name `ghghgh`',
+        err_resp = MockResponse({'error_id': 400,
+                             'error_message': 'No site found for name `smth`',
                              'error_name': 'bad_parameter'}, 400)
 
-        mocker.patch('aiostack._base_client.aiohttp.ClientSession.get', return_value=resp)
-        await aiostack._base_client.get('answers/1', site='ghghgh')
+        mocker.patch('aiostack._base_client.aiohttp.ClientSession.get', return_value=err_resp)
+        await aiostack._base_client.get('answers/1', site='smth')
