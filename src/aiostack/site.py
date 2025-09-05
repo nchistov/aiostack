@@ -90,3 +90,44 @@ class Site:
         data = await self.get('badges/tags', **kwargs)
 
         return data.items
+
+    async def get_all_collectives(self, **kwargs: int | str) -> list[Item]:
+        """Get all Collectives on the site, in alphabetical order"""
+        data = await self.get('collectives', **kwargs)
+
+        return data.items
+
+    async def get_collectives_by_slugs(self, slugs: list[str], **kwargs: int | str) -> list[Item]:
+        """Get Collectives identified by a set of slugs"""
+        url = 'collectives/' + ';'.join(slugs)
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_questions_by_collectives(self, slugs: list[str], **kwargs: int | str) -> list[Item]:
+        """Get questions identified by a set of slugs"""
+        url = 'collectives/' + ';'.join(slugs) + '/questions'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_answers_by_collectives(self, slugs: list[str], **kwargs: int | str) -> list[Item]:
+        """Get answers identified by a set of slugs"""
+        url = 'collectives/' + ';'.join(slugs) + '/answers'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_tags_by_collectives(self, slugs: list[str], **kwargs: int | str) -> list[Item]:
+        """Get tags identified by a set of slugs"""
+        url = 'collectives/' + ';'.join(slugs) + '/tags'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_users_by_collectives(self, slugs: list[str], **kwargs: int | str) -> list[Item]:
+        """Get users identified by a set of slugs"""
+        url = 'collectives/' + ';'.join(slugs) + '/users'
+        data = await self.get(url, **kwargs)
+
+        return data.items
