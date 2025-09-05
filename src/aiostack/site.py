@@ -131,3 +131,16 @@ class Site:
         data = await self.get(url, **kwargs)
 
         return data.items
+
+    async def get_all_comments(self, **kwargs: int | str) -> list[Item]:
+        """Get all comments on the site"""
+        data = await self.get('comments', **kwargs)
+
+        return data.items
+
+    async def get_comments_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get comments identified by a set of ids"""
+        url = 'comments/' + ';'.join([str(id) for id in ids])
+        data = await self.get(url, **kwargs)
+
+        return data.items
