@@ -1,7 +1,7 @@
 import pytest
 import aiostack
 
-from mock_response import MockResponse
+from . import MockResponse
 
 resp = MockResponse({'items': [], 'has_more': False, 'quota_max': 10000, 'quota_remaining': 9999}, 200)
 
