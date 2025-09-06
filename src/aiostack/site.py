@@ -178,3 +178,9 @@ class Site:
         data = await self.get(url, **kwargs)
 
         return data.items
+
+    async def get_all_privileges(self, **kwargs: int | str) -> list[Item]:
+        """Get all the privileges available on the site"""
+        data = await self.get('privileges', **kwargs)
+
+        return data.items
