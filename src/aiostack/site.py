@@ -144,3 +144,37 @@ class Site:
         data = await self.get(url, **kwargs)
 
         return data.items
+
+    async def get_all_posts(self, **kwargs: int | str) -> list[Item]:
+        """Get all posts (questions and answers) in the system"""
+        data = await self.get('posts', **kwargs)
+
+        return data.items
+
+    async def get_posts_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get all posts identified by a set of ids. Useful for when the type of post (question or answer) is not known"""
+        url = 'posts/' + ';'.join([str(id) for id in ids])
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_comments_on_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get comments on the posts (question or answer) identified by a set of ids"""
+        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/comments'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_revisions_by_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get revisions on the set of posts in ids"""
+        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/revisions'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_edits_by_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get suggested edits on the set of posts in ids"""
+        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/suggested-edits'
+        data = await self.get(url, **kwargs)
+
+        return data.items
