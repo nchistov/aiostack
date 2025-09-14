@@ -34,21 +34,21 @@ class Site:
 
     async def get_answers_by_id(self, ids: list[int], **kwargs: str | int) -> list[Item]:
         """Get answers identified by a set of ids"""
-        url = 'answers/' + ';'.join([str(id) for id in ids])
+        url = 'answers/' + ';'.join(str(i) for i in ids)
         data = await self.get(url, **kwargs)
 
         return data.items
 
     async def get_comments_on_answers(self, ids: list[int], **kwargs: str | int) -> list[Item]:
         """Get comments on the answers identified by a set of ids"""
-        url = 'answers/' + ';'.join([str(id) for id in ids]) + '/comments'
+        url = 'answers/' + ';'.join(str(i) for i in ids) + '/comments'
         data = await self.get(url, **kwargs)
 
         return data.items
 
     async def get_questions_by_answers(self, ids: list[int], **kwargs: str | int) -> list[Item]:
         """Gets all questions the answers identified by ids are on"""
-        url = 'answers/' + ';'.join([str(id) for id in ids]) + '/questions'
+        url = 'answers/' + ';'.join(str(i) for i in ids) + '/questions'
         data = await self.get(url, **kwargs)
 
         return data.items
@@ -67,7 +67,7 @@ class Site:
 
     async def get_badges_by_id(self, ids: list[int], **kwargs: str | int) -> list[Item]:
         """Get the badges identified by ids"""
-        url = 'badges/' + ';'.join([str(id) for id in ids])
+        url = 'badges/' + ';'.join(str(i) for i in ids)
         data = await self.get(url, **kwargs)
 
         return data.items
@@ -80,7 +80,7 @@ class Site:
 
     async def get_badges_recipients_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Returns recently awarded badges in the system, constrained to a certain set of badges"""
-        url = 'badges/' + ';'.join([str(id) for id in ids]) + '/recipients'
+        url = 'badges/' + ';'.join(str(i) for i in ids) + '/recipients'
         data = await self.get(url, **kwargs)
 
         return data.items
@@ -140,7 +140,7 @@ class Site:
 
     async def get_comments_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Get comments identified by a set of ids"""
-        url = 'comments/' + ';'.join([str(id) for id in ids])
+        url = 'comments/' + ';'.join(str(i) for i in ids)
         data = await self.get(url, **kwargs)
 
         return data.items
@@ -153,28 +153,28 @@ class Site:
 
     async def get_posts_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Get all posts identified by a set of ids. Useful for when the type of post (question or answer) is not known"""
-        url = 'posts/' + ';'.join([str(id) for id in ids])
+        url = 'posts/' + ';'.join(str(i) for i in ids)
         data = await self.get(url, **kwargs)
 
         return data.items
 
     async def get_comments_on_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Get comments on the posts (question or answer) identified by a set of ids"""
-        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/comments'
+        url = 'posts/' + ';'.join(str(i) for i in ids) + '/comments'
         data = await self.get(url, **kwargs)
 
         return data.items
 
     async def get_revisions_by_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Get revisions on the set of posts in ids"""
-        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/revisions'
+        url = 'posts/' + ';'.join(str(i) for i in ids) + '/revisions'
         data = await self.get(url, **kwargs)
 
         return data.items
 
     async def get_edits_by_posts(self, ids: list[int], **kwargs: int | str) -> list[Item]:
         """Get suggested edits on the set of posts in ids"""
-        url = 'posts/' + ';'.join([str(id) for id in ids]) + '/suggested-edits'
+        url = 'posts/' + ';'.join(str(i) for i in ids) + '/suggested-edits'
         data = await self.get(url, **kwargs)
 
         return data.items
@@ -182,5 +182,25 @@ class Site:
     async def get_all_privileges(self, **kwargs: int | str) -> list[Item]:
         """Get all the privileges available on the site"""
         data = await self.get('privileges', **kwargs)
+
+        return data.items
+
+    async def get_all_questions(self, **kwargs: int | str) -> list[Item]:
+        """Get all questions on the site"""
+        data = await self.get('questions', **kwargs)
+
+        return data.items
+
+    async def get_questions_by_id(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the questions identified by a set of ids"""
+        url = 'questions/' + ';'.join(str(i) for i in ids)
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_answers_by_questions(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the answers to the questions identified by a set of ids"""
+        url = 'questions/' + ';'.join(str(i) for i in ids) + '/answers'
+        data = await self.get(url, **kwargs)
 
         return data.items
