@@ -250,3 +250,21 @@ class Site:
         data = await self.get('questions/unanswered', **kwargs)
 
         return data.items
+
+    async def search(self, **kwargs: int | str) -> list[Item]:
+        """Search the site for questions meeting certain criteria"""
+        data = await self.get('search', **kwargs)
+
+        return data.items
+
+    async def advanced_search(self, **kwargs: int | str) -> list[Item]:
+        """Search the site for questions using most of the on-site search options"""
+        data = await self.get('search/advanced', **kwargs)
+
+        return data.items
+
+    async def search_similar(self, **kwargs: int | str) -> list[Item]:
+        """Search the site based on similarity to a title"""
+        data = await self.get('similar', **kwargs)
+
+        return data.items
