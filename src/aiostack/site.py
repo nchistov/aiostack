@@ -204,3 +204,49 @@ class Site:
         data = await self.get(url, **kwargs)
 
         return data.items
+
+    async def get_comments_on_questions(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the comments on the questions identified by a set of ids"""
+        url = 'questions/' + ';'.join(str(i) for i in ids) + '/comments'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_linked_questions(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the questions that link to the questions identified by a set of id"""
+        url = 'questions/' + ';'.join(str(i) for i in ids) + '/linked'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_related_questions(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the questions that are related to the questions identified by a set of ids"""
+        url = 'questions/' + ';'.join(str(i) for i in ids) + '/related'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_questions_timeline(self, ids: list[int], **kwargs: int | str) -> list[Item]:
+        """Get the timelines of the questions identified by a set of ids"""
+        url = 'questions/' + ';'.join(str(i) for i in ids) + '/timeline'
+        data = await self.get(url, **kwargs)
+
+        return data.items
+
+    async def get_active_bounties(self, **kwargs: int | str) -> list[Item]:
+        """Get all questions on the site with active bounties"""
+        data = await self.get('questions/featured', **kwargs)
+
+        return data.items
+
+    async def get_questions_without_answers(self, **kwargs: int | str) -> list[Item]:
+        """Get all questions on the site with **no** answers"""
+        data = await self.get('questions/no-answers', **kwargs)
+
+        return data.items
+
+    async def get_unanswered_questions(self, **kwargs: int | str) -> list[Item]:
+        """Get all questions the site considers unanswered"""
+        data = await self.get('questions/unanswered', **kwargs)
+
+        return data.items
